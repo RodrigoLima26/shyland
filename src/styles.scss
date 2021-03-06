@@ -1,0 +1,55 @@
+/* You can add global styles to this file, and also import other style files */
+/* @import "./node_modules/nes.css/css/nes"; */
+
+$GREEN: #889e81;
+$LGREEN: #bac7a7;
+$DGREEN: #698474;
+$LYELLOW: rgb(234, 225, 62);
+$YELLOW: rgb(221, 191, 35);
+
+$WARNING: #ffc107;
+$DANGER: #dc3545;
+$SUCCESS: #28a745;
+$INFO: #17a2b8;
+$PRIMARY: #007bff;
+$SECONDARY: #6c757d;
+$GRAY: #adb5bd;
+$GRAYDARK: #343a40;
+$LIGHT: #1f2d3d;
+$INDIGO: #6610f2;
+$LIGHTBLUE: #3c8dbc;
+$NAVY: #001f3f;
+$PURPLE: #605ca8;
+$FUSCHIA: #f012be;
+$PINK: #e83e8c;
+$MAROON: #d81b60;
+$ORANGE: #ff851b;
+$LIME: #01ff70;
+$TEAL: #39cccc;
+$OLIVE: #3d9970;
+
+@mixin set-card-mission-colors($color) {
+    background: $color;
+    .mission-card-header {
+        h3 {
+            background-color: white;
+            color: $color;
+        }
+    }
+    .mission-card-content {
+        h3.title {
+            color: $color;
+        }
+    }
+}
+
+textarea {
+    resize: none;
+}
+
+.has-errors {
+    color: $DANGER;
+    input, select, textarea {
+        border-color: $DANGER;
+    }
+}

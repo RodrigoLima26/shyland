@@ -1,0 +1,88 @@
+@import "../../app.component.scss";
+
+.navbar {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    background-color: $GREEN;
+    .nav-link {
+        color: white;
+    }
+    .navbar-toggler {
+        background-color: $GREEN;
+        border: 2px solid white;
+        i {
+            color: #fff !important;
+        }
+    }
+}
+
+.base-container {
+    margin: 0 !important;
+    width: 100%;
+    position: relative;
+    max-width: 100%;
+    min-height: 90vh;
+    .left-side {
+        background-color: $LGREEN;
+        height: 90vh;
+    }
+}
+
+.footer {
+    padding: 10px;
+    color: white;
+    background-color: $GREEN;
+}
+
+.profile-pic {
+    width: 100%;
+    height: 200px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.profile-name {
+    margin-top: 10px;
+    h3 {
+        font-size: 17px;
+    }
+}
+
+.profile-icons {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: white;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    fa-icon {
+        padding: 10px;
+        cursor: pointer;
+    }
+}
+
+.profile-exp-bar {
+    padding: 10px !important;
+}
+
+.outer-bar {
+    border: 1px solid white !important;
+}
+
+.profile-status {
+    margin-top: 10px;
+    .col-lg-12 {
+        padding: 0 10px !important;
+        margin: 5px 0;
+    }
+}
+
+.profile-level {
+    margin-top: 10px;
+    h3 {
+        line-height: 14px;
+    }
+    small {
+        font-size: 13px;
+    }
+}

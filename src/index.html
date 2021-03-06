@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Shyland</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rellax/1.12.1/rellax.js"></script>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+</head>
+<body>
+
+    <app-root></app-root>
+
+    <script>
+
+        window.onload = function() {
+            var rellax = new Rellax('.rellax')
+        };
+
+        function scrollElement(element) {
+            let el = document.querySelector(`#${element}`);
+
+            el.scrollIntoView({ behavior: 'smooth', block: 'end'});
+        }
+
+    </script>
+</body>
+</html>

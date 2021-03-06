@@ -1,0 +1,64 @@
+@import "../styles";
+
+html {
+    scroll-behavior: smooth !important;
+}
+
+strong {
+  color: $GREEN;
+}
+
+.col-lg-12 {
+  padding: 0px !important;
+}
+
+.container-fluid {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+#about-section,
+#news-section {
+  padding: 40px 50px;
+}
+
+.title {
+  font-size: 40px;
+}
+
+#news-section {
+  background-color: $LGREEN;
+}
+
+.news-item {
+  background-color: #f5f5f5;
+  padding: 10px !important;
+  &:hover {
+    background-color: $GREEN;
+    strong {
+      color: white;
+    }
+  }
+}
+
+.parallax-image-1 {
+  position: absolute;
+  right: 0;
+  z-index: 2;
+  width: 100px;
+  height: 100px;
+}
+
+.speed-3 {
+  transform: translateZ(-3px) scale(4);
+}
+
+.social-media-icon {
+    fill: white;
+    color: white;
+    max-width: 20px;
+}
+
+.social-media-row .col-6 {
+    padding: 0 5px !important;
+}

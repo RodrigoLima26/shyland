@@ -1,0 +1,23 @@
+<div class="container-fluid home-missions-container">
+    <div class="row">
+        <div *ngFor="let mission of missions" class="col-lg-4 mission-card-back">
+            <div class="container-fluid">
+                <div class="row test-row">
+                    <div class="col-12 mission-card {{ getClassMission(mission.mission.rank) }}">
+                        <div class="mission-card-header text-center">
+                            <h3>{{ mission.mission.rank }}</h3>
+                        </div>
+                        <div class="mission-card-content">
+                            <h3 class="title">
+                                {{ mission.mission.title }}
+                            </h3>
+                            <p class="description">
+                                {{ mission.mission.description }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
