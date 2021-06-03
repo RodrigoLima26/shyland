@@ -14,6 +14,35 @@
                             <p class="description">
                                 {{ mission.mission.description }}
                             </p>
+                            <hr/>
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <h3>
+                                        <img [src]="'assets/icons/'+mission.mission.status.toLowerCase()+'.svg'" style="width: 50px" />
+                                        +{{ mission.mission.exp_status }}
+                                    </h3>
+                                </div>
+                            </div>
+                            <hr class="confidence-hr"/>
+                            <div class="row confidence-row">
+                                <div class="col-lg-12 text-center">
+                                    <small>
+                                        +{{ mission.mission.confidence }} Confiança
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row buttons-row">
+                            <div class="col-6">
+                                <button class="btn btn-danger btn-block" (click)="abandonMission(mission.id)">
+                                    Cancelar
+                                </button>
+                            </div>
+                            <div class="col-6">
+                                <button class="btn btn-success btn-block" (click)="completeMission(mission.id)">
+                                    Finalizar
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

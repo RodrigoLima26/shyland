@@ -1,0 +1,149 @@
+<app-client-layout [changer]="changer">
+    <section>
+
+        <div class="row">
+            <div class="col-lg-12 section-title">
+                <h3>
+                    Perfil
+                </h3>
+                <hr/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-4 text-center">
+                        <input type="file" #fileInput (change)="onFileChanged($event)" style="display:none">
+                        <img [style.background-image]="'url('+getImage()+')'" class="profile-pic" (click)="!visit.id ? fileInput.click() : false" />
+
+                        <button class="btn btn-block btn-danger mt-20" (click)="deleteFriendshipRequest(notification.id)" *ngIf="notification.id && visit.id">
+                            Retirar pedido de Amizade
+                        </button>
+
+                        <button class="btn btn-block btn-danger mt-20" (click)="cancelFriendship(friend.id)" *ngIf="friend.id && visit.id">
+                            Desfazer Amizade
+                        </button>
+                        <button class="btn btn-block btn-success mt-20" *ngIf="!friend.id && visit.id && !notification.id" (click)="sendFriendshipRequest(user.id)">
+                            Enviar Pedido de Amizade
+                        </button>
+                        <button class="btn btn-block btn-danger mt-20" *ngIf="visit.id" (click)="openBanModal(ban_modal)">
+                            Denunciar
+                        </button>
+                    </div>
+                    <div class="col-lg-8">
+                        <canvas baseChart
+                                *ngIf="chart_loaded"
+                                [datasets]="radarChartData"
+                                [options]="radarChartOptions"
+                                [labels]="radarChartLabels"
+                                [chartType]="radarChartType"
+                                [colors]="radarColors">
+                        </canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="padding-top: 20px; padding-bottom: 50px">
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h3>
+                            Informações
+                        </h3>
+                        <form>
+                            <div class="row">
+                                <div class="form-group col-lg-12">
+                                    <label class="label-control">E-mail</label>
+                                    <input type="email" [disabled]="true" class="form-control" name="email" [(ngModel)]="user.email">
+                                </div>
+                                <div class="col-lg-12 has-errors" *ngIf="errors.email">
+                                    <label>{{ errors.email }}</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-lg-6">
+                                    <label class="label-control">Nome de Usuário</label>
+                                    <input type="text" [disabled]="visit.id" class="form-control" name="username" [(ngModel)]="user.player.username">
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    <label class="label-control">Data de Nascimento</label>
+                                    <input type="text" [disabled]="visit.id" class="form-control" name="birthdate" [brmasker]="{mask: '00/00/0000', len: 10}" [(ngModel)]="user.player.formatted_birthdate">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 has-errors" *ngIf="errors.username">
+                                    <label>{{ errors.username }}</label>
+                                </div>
+                                <div class="col-lg-6 has-errors" *ngIf="errors.birthdate">
+                                    <label>{{ errors.birthdate }}</label>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="!visit.id">
+                                <div class="col-lg-12">
+                                    <button class="btn btn-success btn-block" (click)="saveProfile(user)">
+                                        Salvar
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-6">
+                        <form *ngIf="!visit.id">
+                            <h3>
+                                Mudar Senha
+                            </h3>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label class="label-control">Senha</label>
+                                    <input name="password" type="password" [(ngModel)]="user.password" class="form-control"/>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="label-control">Confirmar Senha</label>
+                                    <input name="confirm_password" type="password" [(ngModel)]="user.confirm_password" class="form-control"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 has-errors" *ngIf="errors.password">
+                                    <label>{{ errors.password }}</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button class="btn btn-success btn-block" [disabled]="!user.password || !user.confirm_password" (click)="changePassword(user)">
+                                        Trocar Senha
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <ng-template #ban_modal let-banmodal class="modal" tabindex="-1" role="dialog">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-ban-title">
+                Denunciar {{ selected_user.player.username }}
+            </h4>
+            <button type="button" class="close" aria-label="Close" (click)="banmodal.dismiss('Cross click')">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label>Motivo da Denuncia</label>
+                    <textarea [(ngModel)]="ban_message" name="notification_message" class="form-control" id="ban_message"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="col-lg-12 text-right">
+                <button class="btn" (click)="banmodal.dismiss()">Fechar</button>
+                <button [disabled]="!ban_message" (click)="sendMessage(ban_message, selected_user.id, banmodal)" class="btn btn-success">Enviar Denuncia</button>
+            </div>
+        </div>
+    </ng-template>
+</app-client-layout>

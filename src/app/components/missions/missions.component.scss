@@ -12,6 +12,21 @@
             &.mission-card-E {
                 @include set-card-mission-colors($GRAY);
             }
+            &.mission-card-D {
+                @include set-card-mission-colors($INFO);
+            }
+            &.mission-card-C {
+                @include set-card-mission-colors($PURPLE);
+            }
+            &.mission-card-B {
+                @include set-card-mission-colors($ORANGE);
+            }
+            &.mission-card-A {
+                @include set-card-mission-colors($WARNING);
+            }
+            &.mission-card-S {
+                @include set-card-mission-colors($OLIVE);
+            }
             .mission-card-header {
                 h3 {
                     width: 100px;
@@ -38,6 +53,28 @@
                     line-height: 15px;
                 }
             }
+            .buttons-row {
+                .btn {
+                    background: transparent !important;
+                    border: 2px solid #fff;
+                    color: #fff;
+                    border-radius: 11px;
+                    transition: 0.2s ease;
+
+                    &.btn-success:hover {
+                        background: $SUCCESS !important;
+                        transition: 0.2s ease;
+                        border-radius: 5px;
+                    }
+
+                    &.btn-danger:hover {
+                        background: $DANGER !important;
+                        transition: 0.2s ease;
+                        border-radius: 5px;
+                    }
+                }
+                padding-top: 10px;
+            }
         }
 
     }
@@ -53,4 +90,14 @@
 .test-row > [class*='col-'] {
     display: flex;
     flex-direction: column;
+}
+
+.confidence-hr {
+    margin-bottom: 5px;
+}
+
+.confidence-row {
+    small {
+        font-weight: bolder;
+    }
 }

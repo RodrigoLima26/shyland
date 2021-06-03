@@ -4,12 +4,13 @@
     position: relative;
     z-index: 10;
     width: 100%;
-    background-color: $GREEN;
+    background-color: $BLUE;
+    border-bottom: 1px solid rgb(85, 134, 210);
     .nav-link {
-        color: white;
+        color: black;
     }
     .navbar-toggler {
-        background-color: $GREEN;
+        background-color: $BLUE;
         border: 2px solid white;
         i {
             color: #fff !important;
@@ -24,23 +25,27 @@
     max-width: 100%;
     min-height: 90vh;
     .left-side {
-        background-color: $LGREEN;
-        height: 90vh;
+        background-color: $BLUE;
+        min-height: 90vh;
     }
 }
 
 .footer {
     padding: 10px;
     color: white;
-    background-color: $GREEN;
+    background-color: $HBLUE;
 }
 
 .profile-pic {
-    width: 100%;
-    height: 200px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    padding: 3px 5px !important;
+    img {
+        width: 100%;
+        height: 200px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 11px;
+    }
 }
 
 .profile-name {
@@ -71,9 +76,12 @@
 
 .profile-status {
     margin-top: 10px;
-    .col-lg-12 {
-        padding: 0 10px !important;
-        margin: 5px 0;
+    .icon-status {
+
+    }
+    .bar-status {
+        padding: 0 10px 0 0 !important;
+        margin: 11px 0 5px 0;
     }
 }
 
@@ -84,5 +92,35 @@
     }
     small {
         font-size: 13px;
+    }
+}
+
+.left-responsive {
+    display: none;
+    background-color: $LGREEN;
+    padding: 10px;
+    font-weight: 600;
+}
+
+.notification_count {
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.logo {
+    max-width: 80px;
+    width: 100%;
+}
+
+@media(max-width: 992px) {
+
+    .left-responsive {
+        display: unset;
+    }
+
+    .base-container {
+        .left-side {
+            display: none;
+        }
     }
 }

@@ -1,0 +1,19 @@
+<div class="row text-center">
+    <div class="col-12">
+        <button class="btn btn-hblue" [disabled]="pagination.page == 1" (click)="emitPaginateFunction(1)">
+            <<
+        </button>
+        <button class="btn btn-hblue" [disabled]="pagination.page == 1" (click)="emitPaginateFunction(pagination.page - 1)">
+            <
+        </button>
+        <button *ngFor="let seq of pagination.sequence" class="btn btn-hblue" [disabled]="pagination.page == seq" (click)="emitPaginateFunction(seq)">
+            {{ seq }}
+        </button>
+        <button class="btn btn-hblue" [disabled]="pagination.page == pagination.last" (click)="emitPaginateFunction(pagination.page + 1)">
+            >
+        </button>
+        <button class="btn btn-hblue" [disabled]="pagination.page == pagination.last" (click)="emitPaginateFunction(pagination.last)">
+            >>
+        </button>
+    </div>
+</div>

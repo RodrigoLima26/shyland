@@ -1,5 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light" #stickyMenu [class.sticky]="sticky">
-    <a class="navbar-brand" href="#">Logo</a>
+    <a class="navbar-brand" href="#">
+        <img src="/assets/images/logo_small.png" class="logo">
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <i class="fa fa-bars"></i>
     </button>
@@ -7,28 +9,39 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="javascript:void(0)">Início <span class="sr-only">(current)</span></a>
+                <a class="nav-link" routerLink="/jogador" routerLinkActive="active">Início <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="javascript:void(0)" onclick="scrollElement('sobre')">Sobre</a>
+                <a class="nav-link" routerLink="/jogador/missoes" routerLinkActive="active">Historico de Missões</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/jogador/usuarios" routerLinkActive="active">Jogadores</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/jogador/notificacoes" routerLinkActive="active">
+                    Notificações <span *ngIf="notification_count > 0" class="bg-danger notification_count">{{ notification_count }}</span>
+                </a>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a href="javascript:void(0)" class="nav-link">Perfil</a>
+                <a href="javascript:void(0)" routerLink="/jogador/perfil" routerLinkActive="active" class="nav-link">Perfil</a>
             </li>
             <li class="nav-item">
-                <a href="javascript:void(0)" class="nav-link">Sair</a>
+                <a href="javascript:void(0)" (click)="logout()" class="nav-link">Sair</a>
             </li>
         </ul>
     </div>
 </nav>
 <div class="container base-container">
     <div class="row">
-        <div class="col-sm-2 col-12 left-side">
+        <div class="col-md-12 text-center left-responsive">
+            {{ user.player.username }} - Nível {{ user.player.status.level }}
+        </div>
+        <div class="col-md-12 col-lg-2 left-side">
             <div class="row">
-                <div class="col-lg-12">
-                    <img [style.background-image]="'url('+getImage()+')'" class="profile-pic" />
+                <div class="col-lg-12 profile-pic">
+                    <img [style.background-image]="'url('+getImage()+')'" />
                 </div>
             </div>
             <div class="row">
@@ -44,23 +57,22 @@
                         <small>Nível</small>
                     </h3>
                 </div>
-                <div class="col-lg-12 profile-exp-bar" placement="top" tooltip="{{ user.player.status.confidence }}/{{ user.player.status.conf_next_level }}">
-                    <ng-simple-progress-bar [percent]="calcPercent(user.player.status.confidence, user.player.status.conf_next_level)" [color]="'#09f'" [backgroundColor]="'#fff'" [height]="'10px'" [progressBarType]="progress_bar_type" [isStatic]="true"></ng-simple-progress-bar>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12 text-center profile-icons">
-                    <fa-icon [icon]="icons.bell"></fa-icon>
-                    <fa-icon [icon]="icons.mail"></fa-icon>
+                <div class="col-lg-12 profile-exp-bar" placement="top" tooltip="{{ user.player.status.confidence }}/{{ user.player.status.conf_next_level }}" *ngIf="!progress_bar_loading">
+                    <ng-simple-progress-bar [percent]="calcPercent(user.player.status.confidence, user.player.status.conf_next_level)" [color]="'#09f'" [backgroundColor]="'#fff'" [height]="'10px'" [progressBarType]="progress_bar_type" [isStatic]="false"></ng-simple-progress-bar>
                 </div>
             </div>
             <div class="row profile-status" *ngIf="formatted_status.length > 0">
-                <div class="col-lg-12" *ngFor="let status of formatted_status"  placement="top" tooltip="{{ status.name }}: {{ status.value }}">
-                    <ng-simple-progress-bar [percent]="calcPercent(status.value, (bestStatus()).value)" [color]="status.color" [backgroundColor]="'#fff'" [height]="'10px'" [progressBarType]="progress_bar_type" [isStatic]="true"></ng-simple-progress-bar>
-                </div>
+                <ng-container *ngFor="let status of formatted_status">
+                    <div class="col-lg-3 icon-status">
+                        <img [src]="'assets/icons/'+status.status+'.svg'" style="width: 100%"/>
+                    </div>
+                    <div class="col-lg-9 bar-status" placement="top" tooltip="{{ status.name }}: {{ status.value }}">
+                        <ng-simple-progress-bar [percent]="calcPercent(status.value, (bestStatus()).value)" [color]="status.color" [backgroundColor]="'#fff'" [height]="'10px'" [progressBarType]="progress_bar_type" [isStatic]="false"></ng-simple-progress-bar>
+                    </div>
+                </ng-container>
             </div>
         </div>
-        <div class="col-sm-10 col-12">
+        <div class="col-md-12 col-lg-10">
             <ng-content></ng-content>
         </div>
     </div>

@@ -1,5 +1,5 @@
 <app-client-layout [changer]="changer">
 
-    <app-missions></app-missions>
+    <app-missions (completeMissionHandler)="changer = !changer"></app-missions>
 
 </app-client-layout>

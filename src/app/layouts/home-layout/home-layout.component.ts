@@ -1,4 +1,4 @@
-import {Component, ContentChild, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
+import {Component, ContentChild, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild} from '@angular/core';
 import * as $ from 'jquery';
 import {NgbModule, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {UserService} from '../../../services/api/user/user.service';
@@ -6,6 +6,7 @@ import {faSignInAlt} from '@fortawesome/free-solid-svg-icons';
 import {ValidationsService} from '../../../services/validations/validations.service';
 import {UtilitiesService} from '../../../services/utilities/utilities.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {environment} from '../../../environments/environment';
 
 @Component({
     selector: 'app-home-layout',
@@ -15,10 +16,15 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class HomeLayoutComponent implements OnInit {
 
     @ViewChild('stickyMenu') menuElement: ElementRef;
+    @ViewChild('registerModal') registerModal: ElementRef;
+
+    @Input('modal_control') modal_control:boolean = false;
 
     icons:any = {
         register: faSignInAlt
     }
+
+    socialUrl:string = environment.socialUrl
 
     recover:boolean = false;
     menuPosition: any;
@@ -60,6 +66,13 @@ export class HomeLayoutComponent implements OnInit {
 
     }
 
+    ngOnChanges() {
+        setTimeout(() => {
+            if(this.modal_control)
+                this.registerModal.nativeElement.click();
+        }, 200)
+    }
+
     ngAfterViewInit(){
         this.menuPosition = this.menuElement.nativeElement.offsetTop
     }
@@ -85,6 +98,10 @@ export class HomeLayoutComponent implements OnInit {
             this.userService.login(user).then((data:any) => {
 
                 loading.close();
+
+                this.ngModal.dismissAll();
+
+                this.redirect('/jogador')
 
             }).catch((err:any) => {
 
@@ -131,12 +148,25 @@ export class HomeLayoutComponent implements OnInit {
         this.validateUserRegister(user).then((data:any) => {
             let loading:any = this.utilities.loading();
 
-            user.player.birthdate = this.utilities.formatDate(user.player.birthdate, 'DD/MM/YYYY', 'YYYY-MM-DD');
+            user.player.birthdate = this.utilities.formatDate(user.player.aux_birthdate, 'DD/MM/YYYY', 'YYYY-MM-DD');
 
             this.userService.register(user).then((data:any) => {
-                console.log(data);
+
                 loading.close();
-            }).catch((err:any) => loading.close());
+
+                this.login(user);
+
+            }).catch((err:any) => {
+
+                console.log(err);
+
+                if(err.status == 503)
+                    this.register_errors = err.error;
+                else
+                    this.utilities.alert('error', 'Atenção!', err.error.message);
+
+                loading.close();
+            }).finally(() => loading.close());
         }).catch((err:any) => {});
     }
 
@@ -147,11 +177,11 @@ export class HomeLayoutComponent implements OnInit {
             if(!user.email) this.register_errors.email.push('E-mail Inválido');
             if(!user.username) this.register_errors.username.push('Nome de usuário está inválido');
             if(!user.password) this.register_errors.password.push('Senha Está Inválida');
-            if(!user.player.birthdate) this.register_errors.player.birthdate.push('Data de Nascimento está inválida');
+            if(!user.player.aux_birthdate) this.register_errors.player.birthdate.push('Data de Nascimento está inválida');
 
             if(user.password && (user.password != user.confirm_password)) this.register_errors.password.push('Senha difere da confirmação');
             if(user.email && !this.validations.emailIsValid(user.email)) this.register_errors.email.push('E-mail Inválido');
-            if(user.player.birthdate && this.validations.dateIsValid(user.player.birthdate, 'DD/MM/YYYY')) this.register_errors.player.birthdate.push('Data de Nascimento está inválida');
+            if(user.player.aux_birthdate && this.validations.dateIsValid(user.player.aux_birthdate, 'DD/MM/YYYY')) this.register_errors.player.birthdate.push('Data de Nascimento está inválida');
 
             setTimeout(() => {
                 let total = 0;

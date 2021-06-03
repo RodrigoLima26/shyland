@@ -1,0 +1,35 @@
+@import "../../../styles";
+
+.status-image {
+    width: 30px;
+}
+
+.section-title {
+    padding: 10px 20px;
+}
+
+thead {
+    border: none;
+    td {
+        border: none;
+    }
+}
+
+tr {
+    border: 1px solid #ddd;
+    cursor: pointer;
+    td {
+        border-top: 1px solid #ddd;
+    }
+}
+
+.not_read {
+    background: transparentize($SUCCESS, 0.9);
+    border: 1px solid $SUCCESS !important;
+    a {
+        color: $SUCCESS !important;
+    }
+    td {
+        border-top-color: $SUCCESS;
+    }
+}

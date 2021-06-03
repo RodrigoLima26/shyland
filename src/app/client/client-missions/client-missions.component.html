@@ -1,0 +1,36 @@
+<app-client-layout [changer]="changer">
+    <section>
+
+        <div class="row">
+            <div class="col-lg-12 section-title">
+                <h3>
+                    Historico Missões
+                </h3>
+                <hr/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <table class="table">
+                    <thead>
+                        <td>Missão</td>
+                        <td>Rank</td>
+                        <td>Tipo</td>
+                        <td>Ativa</td>
+                        <td>Completa Em</td>
+                        <td>Abandonada Em</td>
+                    </thead>
+                    <tr *ngFor="let mission of missions" class="{{ getMissionClass(mission) }}">
+                        <td>{{ mission.mission.title }}</td>
+                        <td>{{ mission.mission.rank }}</td>
+                        <td><img class="status-image" [src]="'assets/icons/'+mission.mission.status+'.svg'"/></td>
+                        <td>{{ !mission.completed_at && !mission.abandoned_at ? '✔' : '' }}</td>
+                        <td>{{ mission.completed_at | formatDate }}</td>
+                        <td>{{ mission.abandoned_at | formatDate }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <app-pagination [pagination]="pagination" (callPaginationFunction)="getAllMissions($event)"></app-pagination>
+    </section>
+</app-client-layout>

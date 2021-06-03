@@ -29,7 +29,7 @@ export class OAuthLoginComponent implements OnInit {
 
                     this.userService.setAuthUser(data.user);
 
-                    this.router.navigate(['/cliente'])
+                    this.router.navigate(['/jogador'])
 
                 }).catch((err:any) => {
                     loading.close();

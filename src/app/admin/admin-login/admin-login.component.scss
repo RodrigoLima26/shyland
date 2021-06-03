@@ -1,0 +1,23 @@
+section.container-fluid {
+    height: 100%;
+    min-height: 100vh;
+    background: url('../../../assets/images/fundo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.logo {
+    max-width: 200px;
+    width: 100%;
+}
+
+.form-card {
+    background-color: white;
+    border-radius: 11px;
+    padding: 20px;
+}
+
+.title-p {
+    font-size: 20px;
+}

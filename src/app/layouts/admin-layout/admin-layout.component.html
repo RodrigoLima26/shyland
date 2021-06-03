@@ -1,0 +1,47 @@
+<div class="container-fluid admin-layout">
+    <div class="row">
+        <div class="col-lg-12 menu-header">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-2 menu-icon" (click)="open = true">
+                        <fa-icon [icon]="icons.menu"></fa-icon>
+                    </div>
+                    <div class="col-8 text-center">
+                        <a class="navbar-brand" >
+                            <img src="/assets/images/logo_small.png" class="logo">
+                        </a>
+                    </div>
+                    <div class="col-2 header-items text-right display-none">
+                        <a href="#">
+                            Perfil
+                        </a> &nbsp; &nbsp;
+                        <a href="#">
+                            Sair
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="blackscreen" [ngClass]="{'opened' : open}" (click)="open = false"></div>
+        <div class="col-md-2 left-menu" [ngClass]="{'opened' : open}">
+            <div class="container-fluid">
+                <div class="row photo-row">
+                    <div class="col-lg-12">
+                        <div class="profile-photo" [style.background-image]="'url('+getImage()+')'"></div>
+                    </div>
+                </div>
+                <div class="row name-row">
+                    <div class="col-lg-12 text-center">
+                        {{ user.player.username }}<br/>
+                        <small>Administrador</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <ng-content></ng-content>
+        </div>
+    </div>
+</div>

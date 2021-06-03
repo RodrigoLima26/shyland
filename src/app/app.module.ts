@@ -19,6 +19,15 @@ import { OAuthLoginComponent } from './font-pages/o-auth-login/o-auth-login.comp
 import {TooltipModule} from 'ng2-tooltip-directive';
 import {InterceptorModule} from '../module/interceptor.module';
 import { MissionsComponent } from './components/missions/missions.component';
+import { ClientMissionsComponent } from './client/client-missions/client-missions.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
+import {PipesModule} from '../pipes/pipes.module';
+import { ClientProfileComponent } from './client/client-profile/client-profile.component';
+import {ChartsModule} from 'ng2-charts';
+import { ClientUsersComponent } from './client/client-users/client-users.component';
+import { ClientNotificationsComponent } from './client/client-notifications/client-notifications.component';
+import {ToastrModule} from 'ngx-toastr';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
     declarations: [
@@ -28,8 +37,13 @@ import { MissionsComponent } from './components/missions/missions.component';
         RecoverPasswordComponent,
         ClientHomeComponent,
         ClientLayoutComponent,
+        MissionsComponent,
+        ClientMissionsComponent,
+        PaginationComponent,
+        ClientProfileComponent,
         OAuthLoginComponent,
-        MissionsComponent
+        ClientUsersComponent,
+        ClientNotificationsComponent
     ],
     imports: [
         InterceptorModule,
@@ -40,7 +54,11 @@ import { MissionsComponent } from './components/missions/missions.component';
         BrMaskerModule,
         FontAwesomeModule,
         NgSimpleProgressBarModule,
-        TooltipModule
+        TooltipModule,
+        PipesModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot(),
+        ChartsModule
     ],
     providers: [],
     exports: [

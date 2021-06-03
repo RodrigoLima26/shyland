@@ -1,0 +1,13 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <canvas baseChart
+                    *ngIf="show"
+                    [datasets]="barChartData.datasets"
+                    [options]="barChartOptions"
+                    [labels]="barChartData.labels"
+                    [chartType]="chartType">
+            </canvas>
+        </div>
+    </div>
+</div>

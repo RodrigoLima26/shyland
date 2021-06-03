@@ -7,6 +7,10 @@ $DGREEN: #698474;
 $LYELLOW: rgb(234, 225, 62);
 $YELLOW: rgb(221, 191, 35);
 
+$BLUE: rgb(167, 198, 254);
+$LBLUE: rgb(224, 236, 255);
+$HBLUE: rgb(14, 65, 145);
+
 $WARNING: #ffc107;
 $DANGER: #dc3545;
 $SUCCESS: #28a745;
@@ -28,6 +32,68 @@ $LIME: #01ff70;
 $TEAL: #39cccc;
 $OLIVE: #3d9970;
 
+@mixin set-button-colors($bgcolor, $txtcolor) {
+    background-color: $bgcolor;
+    border: 1px solid $bgcolor;
+    color: $txtcolor;
+    transition: 0.3s ease;
+    &.clear {
+        border: 1px solid $bgcolor;
+        color: $bgcolor;
+        background: transparent;
+        &:hover {
+            background-color: $bgcolor;
+            border: 1px solid $bgcolor;
+            color: $txtcolor;
+            transition: 0.3s ease;
+        }
+    }
+}
+
+.btn {
+    &.btn-success {
+        @include set-button-colors($SUCCESS, #fff)
+    }
+    &.btn-danger {
+        @include set-button-colors($DANGER, #fff)
+    }
+    &.btn-warning {
+        @include set-button-colors($WARNING, #fff)
+    }
+    &.btn-info {
+        @include set-button-colors($INFO, #fff)
+    }
+    &.btn-teal {
+        @include set-button-colors($TEAL, #fff)
+    }
+    &.btn-hblue {
+        @include set-button-colors($HBLUE, #fff)
+    }
+}
+
+.btn-strong {
+    font-size: 25px;
+    font-weight: bolder;
+    padding: 15px 20px;
+    text-transform: uppercase;
+}
+
+.c-success {
+    color: $SUCCESS;
+}
+.c-danger {
+    color: $DANGER;
+}
+.c-warning {
+    color: $WARNING;
+}
+.c-info {
+    color: $INFO;
+}
+.c-teal {
+    color: $TEAL;
+}
+
 @mixin set-card-mission-colors($color) {
     background: $color;
     .mission-card-header {
@@ -41,6 +107,9 @@ $OLIVE: #3d9970;
             color: $color;
         }
     }
+    .confidence-row {
+        color: $color;
+    }
 }
 
 textarea {
@@ -52,4 +121,48 @@ textarea {
     input, select, textarea {
         border-color: $DANGER;
     }
+}
+
+.section-title {
+    padding: 10px 0;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.mt-30 {
+    margin-top: 30px;
+}
+
+.mt-40 {
+    margin-top: 40px;
+}
+
+.mt-60 {
+    margin-top: 60px;
+}
+
+.mt-80 {
+    margin-top: 80px;
+}
+
+.modal-header {
+    background-color: $HBLUE;
+    color: white;
+    .close {
+        color: white;
+        outline: none !important;
+    }
+}
+
+.modal-body {
+
+}
+
+.admin-breadcrumb {
+    background-color: transparent !important;
+    text-align: right;
+    color: #bbb;
+    padding-top: 25px;
 }

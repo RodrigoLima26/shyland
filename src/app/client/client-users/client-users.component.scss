@@ -1,0 +1,29 @@
+@import "../../../styles";
+
+.section-title {
+    padding: 10px 20px;
+}
+
+.tab-buttons-row {
+    button {
+        min-width: 200px;
+    }
+}
+
+.table {
+    margin-top: 30px;
+}
+
+thead {
+    border: none;
+    td {
+        border: none;
+    }
+}
+
+tr {
+    border: 1px solid #ddd;
+    td {
+        border-top: 1px solid #ddd;
+    }
+}

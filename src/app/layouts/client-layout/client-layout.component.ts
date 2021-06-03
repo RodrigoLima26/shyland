@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {faBell, faEnvelope} from '@fortawesome/free-solid-svg-icons';
 import {UserService} from '../../../services/api/user/user.service';
 import * as _ from 'lodash';
+import {Router} from '@angular/router';
+import {NotificationService} from '../../../services/api/notification/notification.service';
 
 @Component({
   selector: 'app-client-layout',
@@ -20,18 +22,39 @@ export class ClientLayoutComponent implements OnInit {
     progress_bar_type:any = 'rounded';
     user:any = {player: {status: {}}};
     formatted_status:any = [];
+    progress_bar_loading:boolean = false;
+    notification_count:any = 0;
 
-    constructor(public userService: UserService) {
+    constructor(public userService: UserService,
+                public notificationService: NotificationService,
+                private router: Router) {
         this.user = this.userService.getAuthUser();
 
         setTimeout(() => this.formatStatus(), 200);
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.getNotReadNotifications();
+    }
 
     ngOnChanges() {
+
+        this.progress_bar_loading = true;
+
+        this.getNotReadNotifications();
+
         this.userService.getUserByApiToken().then((data:any) => {
             this.userService.setAuthUser(data.user);
+
+            this.user = data.user;
+
+            setTimeout(() => this.formatStatus(), 200);
+        }).finally(() => this.progress_bar_loading = false);
+    }
+
+    getNotReadNotifications() {
+        this.notificationService.getNotReadCount().then((data:any) => {
+            this.notification_count = data.count;
         })
     }
 
@@ -69,5 +92,12 @@ export class ClientLayoutComponent implements OnInit {
     calcPercent(value, total) {
         if(value == 0 || total == 0) return 0;
         return (value * 100) / total;
+    }
+
+    logout() {
+        this.userService.logout();
+
+        this.router.navigate(['/'])
+
     }
 }

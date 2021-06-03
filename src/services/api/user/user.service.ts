@@ -77,4 +77,74 @@ export class UserService {
                 .subscribe((data:any) => resolve(data), err => reject(err));
         })
     }
+
+    changePassword(password) {
+        return new Promise((resolve, reject) => {
+            this.http.post(`${environment.apiUrl}/user/change-password`, {password: password})
+                .subscribe((data:any) => resolve(data), err => reject(err));
+        })
+    }
+
+    update(user) {
+        return new Promise((resolve, reject) => {
+            this.http.post(`${environment.apiUrl}/user/update`, user)
+                .subscribe((data:any) => resolve(data), err => reject(err));
+        })
+    }
+
+    getUserById(id) {
+        return new Promise((resolve, reject) => {
+            this.http.get(`${environment.apiUrl}/user/get-by-id/${id}`)
+                .subscribe((data:any) => resolve(data), err => reject(err));
+        })
+    }
+
+    photoUpload(photo) {
+        return new Promise((resolve, reject) => {
+            this.http.post(`${environment.apiUrl}/user/photo-upload`, {profile_pic: photo})
+                .subscribe((data:any) => resolve(data), err => reject(err));
+        })
+    }
+
+    getAllUsers(page:any = 1, q:string = '') {
+        return new Promise((resolve, reject) => {
+            this.http.get(`${environment.apiUrl}/users?page=${page}&q=${q}`)
+                .subscribe((data:any) => resolve(data), err => reject(err));
+        })
+    }
+
+    getUserFriendships(user_id:any) {
+        return new Promise((resolve, reject) => {
+            this.http.get(`${environment.apiUrl}/friendship?user_id=${user_id}`)
+                .subscribe((data:any) => resolve(data), err => reject(err));
+        })
+    }
+
+    friendshipNotification(visit_id:any, user_id:any) {
+        return new Promise((resolve, reject) => {
+            this.http.post(`${environment.apiUrl}/friendship/notification/${visit_id}`, {})
+                .subscribe((data:any) => resolve(data), err => reject(err));
+        })
+    }
+
+    confirmFriendship(notification_id:any) {
+        return new Promise((resolve, reject) => {
+            this.http.post(`${environment.apiUrl}/friendship/notification/${notification_id}/confirm`, {})
+                .subscribe((data:any) => resolve(data), err => reject(err));
+        })
+    }
+
+    cancelFriendshipNotiication(notification_id:any) {
+        return new Promise((resolve, reject) => {
+            this.http.delete(`${environment.apiUrl}/friendship/notification/${notification_id}/delete`)
+                .subscribe((data:any) => resolve(data), err => reject(err));
+        })
+    }
+
+    cancelFriendship(friend_id:any) {
+        return new Promise((resolve, reject) => {
+            this.http.delete(`${environment.apiUrl}/friendship/notification/${friend_id}/delete`)
+                .subscribe((data:any) => resolve(data), err => reject(err));
+        })
+    }
 }

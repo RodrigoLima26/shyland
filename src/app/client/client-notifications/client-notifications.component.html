@@ -1,0 +1,110 @@
+<app-client-layout [changer]="changer">
+    <section>
+
+        <div class="row">
+            <div class="col-lg-12 section-title">
+                <h3>
+                    Notificações
+                </h3>
+                <hr/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center" *ngIf="notifications.length == 0">
+                <p>
+                    Você não possui notificações
+                </p>
+            </div>
+            <div class="col-lg-12" *ngIf="notifications.length > 0">
+                <div class="table-responsive">
+                    <table class="table">
+                        <tr *ngFor="let notification of notifications" [ngClass]="{'not_read' : !notification.read}">
+                            <ng-container *ngIf="notification.friend_request != 1">
+                                <td (click)="openModal(mymodal, notification)">
+                                    {{ !notification.read ? '[NOVO]' : '' }} {{ notification.title }}
+                                </td>
+                                <td><a routerLink="/jogador/perfil/{{ notification.sender.user.id }}" *ngIf="notification.sender_id" routerLinkActive="active">{{ notification.sender.username }}</a></td>
+                                <td (click)="openModal(mymodal, notification)">{{ notification.created_at | formatDate }}</td>
+                                <td class="text-center">
+                                    <fa-icon style="cursor: pointer" class="c-info" *ngIf="notification.sender_id" (click)="openModal(mymodal, notification, true)" [icon]="icons.reply"></fa-icon> &nbsp; &nbsp;
+                                    <fa-icon class="c-danger" (click)="deleteNotification(notification)" [icon]="icons.close"></fa-icon>
+                                </td>
+                            </ng-container>
+                            <ng-container *ngIf="notification.friend_request == 1">
+                                <td (click)="openModal(mymodal, notification)">
+                                    {{ !notification.read ? '[NOVO]' : '' }} {{ notification.title }}
+                                </td>
+                                <td><a routerLink="/jogador/perfil/{{ notification.sender.user.id }}" routerLinkActive="active">{{ notification.sender.username }}</a></td>
+                                <td (click)="openModal(mymodal, notification)">{{ notification.created_at | formatDate }}</td>
+                                <td class="text-center">
+                                    <fa-icon style="cursor: pointer" class="c-success" (click)="confirmFriendship(notification)" [icon]="icons.check"></fa-icon> &nbsp; &nbsp;
+                                    <fa-icon style="cursor: pointer" class="c-danger" (click)="deleteNotification(notification)" [icon]="icons.close"></fa-icon>
+                                </td>
+                            </ng-container>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <app-pagination *ngIf="notifications.length > 0" [pagination]="pagination" (callPaginationFunction)="getAllNotifications($event)"></app-pagination>
+    </section>
+
+    <ng-template #mymodal let-modal class="modal" tabindex="-1" role="dialog">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">
+                {{ selected_notification.title }}
+            </h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="col-lg-12">
+                <p>
+                    {{ selected_notification.message }}
+                </p>
+            </div>
+            <div class="col-lg-12" *ngIf="selected_notification.sender_id && !selected_notification.friend_request && openMessage">
+                <div class="form-group">
+                    <label>Mensagem</label>
+                    <textarea [(ngModel)]="notification_message" name="notification_message" class="form-control" id="notification_message" placeholder="Responder mensagem"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="col-lg-12 text-right">
+                <button class="btn" (click)="modal.dismiss()">Fechar</button>
+                <a (click)="modal.dismiss()" *ngIf="selected_notification.friend_request" routerLink="/jogador/perfil/{{ selected_notification.sender.user.id }}" routerLinkActive="active" class="btn btn-info">Visitar Perfil de {{ selected_notification.sender.username }}</a> &nbsp;
+                <button *ngIf="selected_notification.sender_id && !selected_notification.friend_request" class="btn btn-danger" (click)="openBanModal(modal, ban_modal)">Denunciar </button> &nbsp;
+                <button [disabled]="!notification_message" (click)="sendMessage(notification_message, selected_notification.sender_id, modal)" *ngIf="selected_notification.sender_id && !selected_notification.friend_request && openMessage" class="btn btn-success">Responder <fa-icon [icon]="icons.reply"></fa-icon></button>
+                <button (click)="openMessage = true" *ngIf="selected_notification.sender_id && !selected_notification.friend_request && !openMessage" class="btn btn-info">Responder Mensagem <fa-icon [icon]="icons.reply"></fa-icon></button>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template #ban_modal let-banmodal class="modal" tabindex="-1" role="dialog">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-ban-title">
+                Denunciar {{ selected_notification.sender.username }}
+            </h4>
+            <button type="button" class="close" aria-label="Close" (click)="banmodal.dismiss('Cross click')">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label>Motivo da Denuncia</label>
+                    <textarea [(ngModel)]="ban_message" name="notification_message" class="form-control" id="ban_message"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="col-lg-12 text-right">
+                <button class="btn" (click)="banmodal.dismiss()">Fechar</button>
+                <button [disabled]="!ban_message" (click)="sendMessage(ban_message, selected_notification.sender_id, banmodal)" class="btn btn-success">Enviar Denuncia</button>
+            </div>
+        </div>
+    </ng-template>
+
+</app-client-layout>

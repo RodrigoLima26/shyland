@@ -1,29 +1,35 @@
 @import "../../app.component.scss";
 
 .navbar {
-  position: fixed;
-  top: 0;
-  z-index: 10;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  .nav-link {
-    color: white;
-  }
-  .navbar-toggler {
-    background-color: $GREEN;
-    border: 2px solid white;
-    i {
-      color: #fff !important;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+    background-color: transparent;
+    transition: 0.2s ease;
+    .nav-link {
+        color: black;
     }
-  }
+    .navbar-toggler {
+        background-color: $BLUE;
+        border: 2px solid white;
+        i {
+            color: #fff !important;
+        }
+    }
 }
 
 .sticky{
-  top: 0;
-  overflow: hidden;
-  z-index: 10;
-  width: 100%;
-  background-color: $GREEN;
+    top: 0;
+    overflow: hidden;
+    z-index: 10;
+    width: 100%;
+    background-color: $BLUE;
+    border-bottom: 1px solid rgb(85, 134, 210);
+    transition: 0.2s ease;
+    .nav-link {
+        color: black;
+    }
 }
 
 .bg-green {
@@ -40,8 +46,13 @@
   }
 }
 
+.logo {
+    max-width: 80px;
+    width: 100%;
+}
+
 footer {
-  background-color: $GREEN;
+  background-color: $HBLUE;
   padding: 10px;
   color: white;
 }
