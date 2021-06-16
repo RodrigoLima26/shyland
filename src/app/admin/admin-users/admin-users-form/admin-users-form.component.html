@@ -1,0 +1,169 @@
+<app-admin-layout>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6 header-title">
+                <h1>{{ user.player.username }}</h1>
+            </div>
+            <div class="col-sm-6 header-breadcrumb">
+                <a routerLink="/admin/usuarios" routerLinkActive="active">Usuários</a> > {{ user.player.username }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <hr/>
+            </div>
+        </div>
+    </div>
+
+    <div class="row tab-buttons-row">
+        <div class="col-lg-12 text-center">
+            <button class="btn btn-hblue" [ngClass]="{'clear': !tab_control}" (click)="!tab_control ? changeTab(true) : false">
+                Perfil
+            </button>
+            &nbsp;
+            <button class="btn btn-hblue" [ngClass]="{'clear': tab_control}" (click)="tab_control ? changeTab(false) : false">
+                Missões
+            </button>
+        </div>
+    </div>
+
+    <ng-container *ngIf="tab_control">
+        <form class="container-fluid mt-20">
+            <div class="row">
+                <div class="col-sm-2 text-center">
+                    <img [src]="getImage()" class="profile-pic" />
+                </div>
+                <div class="col-sm-10">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label class="label-control">Nome de Usuário</label>
+                                <input type="text" name="username" [(ngModel)]="user.player.username" class="form-control" id="username" placeholder="Nome de Usuário" disabled>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="label-control">Data de Nascimento</label>
+                                <input type="text" name="birthdate" [value]="user.player.birthdate | formatDate: {format_from: 'YYYY-MM-DD', format_to: 'DD/MM/YYYY'}" class="form-control" id="birthdate" placeholder="Data de Nascimento" disabled>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="label-control">Ingressou em</label>
+                                <input type="text" name="created_at" [value]="user.player.created_at | formatDate: {format_from: 'YYYY-MM-DD', format_to: 'DD/MM/YYYY'}" class="form-control" id="created_at" placeholder="Ingressou em" disabled>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label class="label-control">Nível</label>
+                                <input type="text" name="level" [(ngModel)]="user.player.status.level" class="form-control" id="level" placeholder="Nível" disabled>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="label-control">Confiança</label>
+                                <input type="text" name="confidence" [(ngModel)]="user.player.status.confidence" class="form-control" id="confidence" placeholder="Confiança" disabled>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="label-control">Confiança Próx. Nível</label>
+                                <input type="text" name="conf_next_level" [(ngModel)]="user.player.status.conf_next_level" class="form-control" id="conf_next_level" placeholder="Confiança Próx. Nível" disabled>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-2">
+                                <label class="label-control">Coragem</label>
+                                <input type="text" name="courage" [(ngModel)]="user.player.status.courage" class="form-control text-right" id="courage" placeholder="Coragem" disabled>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label class="label-control">Criativ.</label>
+                                <input type="text" name="criativity" [(ngModel)]="user.player.status.criativity" class="form-control text-right" id="criativity" placeholder="Criatividade" disabled>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label class="label-control">Amizade</label>
+                                <input type="text" name="friendship" [(ngModel)]="user.player.status.friendship" class="form-control text-right" id="friendship" placeholder="Amizade" disabled>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label class="label-control">Intelig.</label>
+                                <input type="text" name="intelligence" [(ngModel)]="user.player.status.intelligence" class="form-control text-right" id="intelligence" placeholder="Inteligência" disabled>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label class="label-control">Bondade</label>
+                                <input type="text" name="kindness" [(ngModel)]="user.player.status.kindness" class="form-control text-right" id="kindness" placeholder="Bondade" disabled>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label class="label-control">Sociab.</label>
+                                <input type="text" name="sociability" [(ngModel)]="user.player.status.sociability" class="form-control text-right" id="sociability" placeholder="Sociabilidade" disabled>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 text-right">
+                                <button class="btn btn-success" (click)="openModal(mymodal)">
+                                    Mensagem do Sistema
+                                </button> &nbsp;
+                                <button class="btn btn-danger" *ngIf="!user.ban_date" (click)="ban(user.id)">
+                                    Banir {{ user.player.username }}
+                                </button>
+                                <button class="btn btn-info" *ngIf="user.ban_date" (click)="unban(user.id)">
+                                    Desbanir {{ user.player.username }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </ng-container>
+
+    <ng-container *ngIf="!tab_control">
+        <div class="row mt-20">
+            <div class="col-lg-12">
+                <table class="table">
+                    <thead>
+                    <td>Missão</td>
+                    <td>Rank</td>
+                    <td>Tipo</td>
+                    <td>Ativa</td>
+                    <td>Completa Em</td>
+                    <td>Abandonada Em</td>
+                    </thead>
+                    <tr *ngFor="let mission of missions" class="{{ getMissionClass(mission) }}">
+                        <td>{{ mission.mission.title }}</td>
+                        <td>{{ mission.mission.rank }}</td>
+                        <td><img class="status-image" [src]="'assets/icons/'+mission.mission.status+'.svg'"/></td>
+                        <td>{{ !mission.completed_at && !mission.abandoned_at ? '✔' : '' }}</td>
+                        <td>{{ mission.completed_at | formatDate }}</td>
+                        <td>{{ mission.abandoned_at | formatDate }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <app-pagination [pagination]="pagination" (callPaginationFunction)="getAllMissions($event)"></app-pagination>
+    </ng-container>
+
+    <!-- New Notification Modal -->
+
+
+    <ng-template #mymodal let-modal class="modal" tabindex="-1" role="dialog">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">
+                Mensagem privada para {{ user.player.username }}
+            </h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label>Título</label>
+                    <input [(ngModel)]="notification_title" maxlength="15" name="notification_title" class="form-control" id="notification_title" placeholder="Título"/>
+                </div>
+                <div class="form-group">
+                    <label>Mensagem</label>
+                    <textarea [(ngModel)]="notification_message" maxlength="150" name="notification_message" class="form-control" id="notification_message" placeholder="Digite uma mensagem para {{ user.player.username }}"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="col-lg-12 text-right">
+                <button class="btn" (click)="modal.dismiss()">Fechar</button>
+                <button class="btn btn-success" [disabled]="!notification_message" (click)="sendMessage(notification_message, user, modal, notification_title)">Enviar</button>
+            </div>
+        </div>
+    </ng-template>
+
+</app-admin-layout>

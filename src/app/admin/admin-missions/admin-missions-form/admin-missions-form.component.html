@@ -1,0 +1,101 @@
+<app-admin-layout>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6 header-title">
+                <h1>{{ mission.id ? mission.description : 'Nova Missão' }}</h1>
+            </div>
+            <div class="col-sm-6 header-breadcrumb">
+                <a routerLink="/admin/missoes" routerLinkActive="active">Missões</a> > {{ mission.id ? mission.description : 'Nova Missão' }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <hr/>
+            </div>
+        </div>
+    </div>
+    <form class="container-fluid mt-20">
+        <div class="row">
+            <div class="col-sm-12">
+                <form (submit)="save(mission)" class="container-fluid">
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label class="label-control">Título *</label>
+                            <input type="text" name="title" [(ngModel)]="mission.title" maxlength="15" class="form-control" id="title" placeholder="Título" />
+                            <div class="row" *ngIf="errors.title && errors.title.length > 0" [ngClass]="{'has-errors': errors.title && errors.title.length > 0}">
+                                <div class="col-sm-12" *ngFor="let error of errors.title">
+                                    {{ error }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label class="label-control">Rank *</label>
+                            <select class="form-control" [(ngModel)]="mission.rank" name="rank" id="rank">
+                                <option value="">Selecione</option>
+                                <option value="E">E</option>
+                                <option value="D">D</option>
+                                <option value="C">C</option>
+                                <option value="B">B</option>
+                                <option value="A">A</option>
+                                <option value="S">S</option>
+                            </select>
+                            <div class="row" *ngIf="errors.rank && errors.rank.length > 0" [ngClass]="{'has-errors': errors.rank && errors.rank.length > 0}">
+                                <div class="col-sm-12" *ngFor="let error of errors.rank">
+                                    {{ error }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label class="label-control">Confiança *</label>
+                            <input type="number" name="confidence" [(ngModel)]="mission.confidence" maxlength="50" class="form-control text-right" id="confidence" placeholder="Confiança" />
+                            <div class="row" *ngIf="errors.confidence && errors.confidence.length > 0" [ngClass]="{'has-errors': errors.confidence && errors.confidence.length > 0}">
+                                <div class="col-sm-12" *ngFor="let error of errors.confidence">
+                                    {{ error }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label class="label-control">Status *</label>
+                            <select class="form-control" [(ngModel)]="mission.status" name="status" id="status">
+                                <option value="">Selecione</option>
+                                <option *ngFor="let status of status_list" [value]="status.status">
+                                    {{ status.name }}
+                                </option>
+                            </select>
+                            <div class="row" *ngIf="errors.status && errors.status.length > 0" [ngClass]="{'has-errors': errors.status && errors.status.length > 0}">
+                                <div class="col-sm-12" *ngFor="let error of errors.status">
+                                    {{ error }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label class="label-control">Quantidade *</label>
+                            <input type="number" name="exp_status" [(ngModel)]="mission.exp_status" maxlength="50" class="form-control text-right" id="exp_status" placeholder="Confiança" />
+                            <div class="row" *ngIf="errors.exp_status && errors.exp_status.length > 0" [ngClass]="{'has-errors': errors.exp_status && errors.exp_status.length > 0}">
+                                <div class="col-sm-12" *ngFor="let error of errors.exp_status">
+                                    {{ error }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="label-control">Descrição *</label>
+                            <textarea name="description" maxlength="150" id="description" rows="5" class="form-control" [(ngModel)]="mission.description"></textarea>
+                            <div class="row" *ngIf="errors.description && errors.description.length > 0" [ngClass]="{'has-errors': errors.description && errors.description.length > 0}">
+                                <div class="col-sm-12" *ngFor="let error of errors.description">
+                                    {{ error }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 text-right">
+                            <button class="btn btn-success" type="submit">Salvar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </form>
+</app-admin-layout>

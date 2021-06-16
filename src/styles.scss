@@ -166,3 +166,14 @@ textarea {
     color: #bbb;
     padding-top: 25px;
 }
+
+table {
+    tr {
+        transition: 0.2s ease;
+        &:hover {
+            background-color: rgba(150, 150, 150, 0.2);
+            transition: 0.2s ease;
+            cursor: pointer;
+        }
+    }
+}

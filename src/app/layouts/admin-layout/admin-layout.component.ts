@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {faBars, faSignInAlt} from '@fortawesome/free-solid-svg-icons';
+import {faAlignCenter, faBars, faBell, faTachometerAlt, faUsers} from '@fortawesome/free-solid-svg-icons';
 import {UserService} from '../../../services/api/user/user.service';
 import {Router} from '@angular/router';
 
@@ -11,7 +11,11 @@ import {Router} from '@angular/router';
 export class AdminLayoutComponent implements OnInit {
 
     icons:any = {
-        menu: faBars
+        menu: faBars,
+        dashboard: faTachometerAlt,
+        users: faUsers,
+        missions: faAlignCenter,
+        notifications: faBell
     }
 
     open:boolean = false;
@@ -21,8 +25,6 @@ export class AdminLayoutComponent implements OnInit {
                 private router: Router) {
 
         this.user = this.userService.getAuthUser();
-
-        console.log(this.user);
     }
 
     ngOnInit(): void {}
@@ -32,6 +34,13 @@ export class AdminLayoutComponent implements OnInit {
             return 'https://www.aisd.net/ousley-junior-high/wp-content/files/sites/40/2018/04/generic-profile-picture.png';
         else
             return this.user.profile_pic;
+    }
+
+    logout() {
+        this.userService.logout();
+
+        this.router.navigate(['/'])
+
     }
 
 }

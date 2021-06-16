@@ -1,5 +1,5 @@
 <app-admin-layout>
-    <div class="container-fluid">
+    <div class="container-fluid section-container">
         <div class="row">
             <div class="col-sm-6 header-title">
                 <h1>Dashboard</h1>
@@ -15,7 +15,12 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Novos Usuários nos Últimos 7 dias</h5>
+                        <h5 class="card-title">
+                            Novos Usuários nos Últimos 7 dias
+                            <small>
+                                <a [href]="back_url+'/admin/dashboard/pdf/users-last-seven-days'"> &nbsp;Gerar PDF</a>
+                            </small>
+                        </h5>
                         <div class="card-text">
                             <app-bar *ngIf="newUersGraphOpen" [barChartData]="newUsersGraphData" [chartType]="'line'"></app-bar>
                         </div>
@@ -25,7 +30,12 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Quantidade de Missões Completas por Rank</h5>
+                        <h5 class="card-title">
+                            Quantidade de Missões Completas por Rank
+                            <small>
+                                <a [href]="back_url+'/admin/dashboard/pdf/missions-complete-by-rank'"> &nbsp;Gerar PDF</a>
+                            </small>
+                        </h5>
                         <div class="card-text">
                             <app-bar *ngIf="qtdMissionsCompletedByRankGraphOpen" [barChartData]="qtdMissionsCompletedByRankGraphData" [chartType]="'pie'"></app-bar>
                         </div>
@@ -37,7 +47,12 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Quantidade de Missões Completas por Rank</h5>
+                        <h5 class="card-title">
+                            Quantidade de Missões Completas por Tipo
+                            <small>
+                                <a [href]="back_url+'/admin/dashboard/pdf/missions-complete-by-type'"> &nbsp;Gerar PDF</a>
+                            </small>
+                        </h5>
                         <div class="card-text">
                             <app-bar *ngIf="qtdMissionsCompletedByTypeGraphOpen" [barChartData]="qtdMissionsCompletedByTypeGraphData" [chartType]="'radar'"></app-bar>
                         </div>
@@ -47,7 +62,12 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Quantidade de Missões Completas por Rank</h5>
+                        <h5 class="card-title">
+                            Quantidade Mensagens Privadas Ultimos 7 Dias
+                            <small>
+                                <a [href]="back_url+'/admin/dashboard/pdf/private-notifications'"> &nbsp;Gerar PDF</a>
+                            </small>
+                        </h5>
                         <div class="card-text">
                             <app-bar *ngIf="qtdPrivateNotificationsLastWeekByTypeGraphOpen" [barChartData]="qtdPrivateNotificationsLastWeekGraphData" [chartType]="'bar'"></app-bar>
                         </div>

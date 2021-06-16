@@ -25,6 +25,27 @@ export class MissionService {
       })
   }
 
+  getAllUserMissionsById(player_id, page:number = 1) {
+      return new Promise((resolve, reject) => {
+          this.http.get(`${environment.apiUrl}/user/${player_id}/missions/all?page=${page}`)
+              .subscribe((data:any) => resolve(data), err => reject(err));
+      })
+  }
+
+  getAdminMissions(body:any, page:number = 1) {
+      return new Promise((resolve, reject) => {
+          this.http.get(`${environment.apiUrl}/admin/missions?page=${page}`,{params: body})
+              .subscribe((data:any) => resolve(data), err => reject(err));
+      })
+  }
+
+  deleteMission(mission_id) {
+      return new Promise((resolve, reject) => {
+          this.http.delete(`${environment.apiUrl}/admin/missions/${mission_id}`)
+              .subscribe((data:any) => resolve(data), err => reject(err));
+      })
+  }
+
   abandonMission(player_mission_id) {
       return new Promise((resolve, reject) => {
           this.http.delete(`${environment.apiUrl}/user/missions/${player_mission_id}/abandon`)
@@ -35,6 +56,20 @@ export class MissionService {
   completeMission(player_mission_id) {
       return new Promise((resolve, reject) => {
           this.http.post(`${environment.apiUrl}/user/missions/${player_mission_id}/complete`, {})
+              .subscribe((data:any) => resolve(data), err => reject(err));
+      })
+  }
+
+  newMission(mission) {
+      return new Promise((resolve, reject) => {
+          this.http.post(`${environment.apiUrl}/admin/missions`, mission)
+              .subscribe((data:any) => resolve(data), err => reject(err));
+      })
+  }
+
+  getMission(mission_id) {
+      return new Promise((resolve, reject) => {
+          this.http.get(`${environment.apiUrl}/admin/missions/${mission_id}`)
               .subscribe((data:any) => resolve(data), err => reject(err));
       })
   }

@@ -16,4 +16,18 @@ export class ContactService {
         })
     }
 
+    getContacts(page:any = 1, body:any = {}) {
+        return new Promise((resolve, reject) => {
+            this.http.get(`${environment.apiUrl}/contact?page=${page}`, {params: body})
+                .subscribe((data:any) => resolve(data), err => reject(err));
+        })
+    }
+
+    readContact(contact_id) {
+        return new Promise((resolve, reject) => {
+            this.http.post(`${environment.apiUrl}/contact/${contact_id}/read`, {})
+                .subscribe((data:any) => resolve(data), err => reject(err));
+        })
+    }
+
 }

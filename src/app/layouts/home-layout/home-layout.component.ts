@@ -7,6 +7,7 @@ import {ValidationsService} from '../../../services/validations/validations.serv
 import {UtilitiesService} from '../../../services/utilities/utilities.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {environment} from '../../../environments/environment';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-home-layout',
@@ -181,7 +182,6 @@ export class HomeLayoutComponent implements OnInit {
 
             if(user.password && (user.password != user.confirm_password)) this.register_errors.password.push('Senha difere da confirmação');
             if(user.email && !this.validations.emailIsValid(user.email)) this.register_errors.email.push('E-mail Inválido');
-            if(user.player.aux_birthdate && this.validations.dateIsValid(user.player.aux_birthdate, 'DD/MM/YYYY')) this.register_errors.player.birthdate.push('Data de Nascimento está inválida');
 
             setTimeout(() => {
                 let total = 0;

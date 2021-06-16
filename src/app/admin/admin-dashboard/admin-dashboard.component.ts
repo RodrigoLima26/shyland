@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {UserService} from '../../../services/api/user/user.service';
 import {AdminDashboardService} from '../../../services/api/admin-dashboard/admin-dashboard.service';
 import {UtilitiesService} from '../../../services/utilities/utilities.service';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -11,6 +12,7 @@ import {UtilitiesService} from '../../../services/utilities/utilities.service';
 export class AdminDashboardComponent implements OnInit {
 
     dashboard:any = {}
+    back_url:string = environment.apiUrl
 
     status_eqv:any = {
         intelligence: 'Inteligência',

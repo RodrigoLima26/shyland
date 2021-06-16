@@ -88,7 +88,7 @@ export class ClientUsersComponent implements OnInit {
 
         let loading:any = this.utilities.loading();
 
-        this.userService.getAllUsers(page, '').then((data:any) => {
+        this.userService.getAllUsers(page, {q: ''}).then((data:any) => {
 
             this.users = data.data;
 

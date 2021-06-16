@@ -1,0 +1,117 @@
+<app-admin-layout>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6 header-title">
+                <h1>Notificações</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <hr/>
+            </div>
+        </div>
+    </div>
+    <div class="row tab-buttons-row">
+        <div class="col-lg-12 text-center">
+            <button class="btn btn-hblue" [ngClass]="{'clear': tab_control}" (click)="tab_control ? changeTab(false) : false">
+                Notificações
+            </button>
+            &nbsp;
+            <button class="btn btn-hblue" [ngClass]="{'clear': !tab_control}" (click)="!tab_control ? changeTab(true) : false">
+                Contatos
+            </button>
+        </div>
+    </div>
+    <div class="container-fluid mt-20" *ngIf="tab_control">
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                    <td>Nome</td>
+                    <td>Contato</td>
+                    <td>Descrição</td>
+                    <td>Enviado em: </td>
+                    </thead>
+                    <tr *ngFor="let contact of contacts" [ngClass]="{'not_read' : !contact.read}">
+                        <td (click)="openContact(contact, ban_modal)">
+                            {{ !contact.read ? '[NOVO]' : '' }} {{ contact.name }}
+                        </td>
+                        <td (click)="openContact(contact, ban_modal)">
+                            {{ contact.contact }}
+                        </td>
+                        <td (click)="openContact(contact, ban_modal)" style="width: 200px">
+                            {{ contact.message }}
+                        </td>
+                        <td (click)="openContact(contact, ban_modal)">{{ contact.created_at | formatDate }}</td>
+
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <app-pagination *ngIf="contacts.length > 0" [pagination]="contact_pagination" (callPaginationFunction)="getContacts($event)"></app-pagination>
+    </div>
+    <div class="container-fluid mt-20" *ngIf="!tab_control">
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                        <td>Título</td>
+                        <td>Remetente</td>
+                        <td>Destinatário</td>
+                        <td>Enviado em: </td>
+                    </thead>
+                    <tr *ngFor="let notification of notifications" [ngClass]="{'not_read' : !notification.read}">
+                        <td (click)="openNotification(notification, ban_modal)">
+                            {{ !notification.read ? '[NOVO]' : '' }} {{ notification.title }}
+                        </td>
+                        <td>
+                            <a routerLink="/admin/usuarios/cadastro/{{ notification.sender.user.id }}" *ngIf="notification.sender_id" routerLinkActive="active">{{ notification.sender.username }}</a>
+                        </td>
+                        <td>
+                            <a routerLink="/admin/usuarios/cadastro/{{ notification.player.user.id }}" *ngIf="notification.player_id" routerLinkActive="active">{{ notification.player.username }}</a>
+                        </td>
+                        <td (click)="openNotification(notification, ban_modal)">{{ notification.created_at | formatDate }}</td>
+
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <app-pagination *ngIf="notifications.length > 0" [pagination]="pagination" (callPaginationFunction)="getAllNotifications($event)"></app-pagination>
+    </div>
+
+    <ng-template #ban_modal let-banmodal class="modal" tabindex="-1" role="dialog">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">
+                {{ selected_notification.title }}
+            </h4>
+            <button type="button" class="close" aria-label="Close" (click)="banmodal.dismiss('Cross click')">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="col-lg-12">
+                <p *ngIf="selected_notification.contact">
+                    <strong>Contato: </strong> {{ selected_notification.contact }}
+                </p>
+                <p>
+                    {{ selected_notification.message }}
+                </p>
+                <p *ngIf="selected_notification.isContact && !respond_contact" (click)="respond_contact = true">
+                    <a href="javascript:void(0)">Responder Contato</a>
+                </p>
+                <div class="row" *ngIf="selected_notification.isContact && respond_contact">
+                    <div class="form-group col-12">
+                        <label class="label-control">Mensagem</label>
+                        <textarea name="respond_message" [(ngModel)]="respond_message" class="form-control" id="respond_message" placeholder="Mensagem"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="col-lg-12 text-right">
+                <button class="btn" (click)="banmodal.dismiss()">Fechar</button>
+                <button *ngIf="selected_notification.complaint_request && !selected_notification.player.user.ban_date" (click)="banUser(selected_notification, banmodal)" class="btn btn-danger">Banir {{ selected_notification.player.username }} </button> &nbsp;
+            </div>
+        </div>
+    </ng-template>
+</app-admin-layout>

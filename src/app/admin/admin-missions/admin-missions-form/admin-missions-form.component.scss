@@ -1,0 +1,46 @@
+@import '../../style';
+
+.profile-pic {
+    width: 100%;
+}
+
+thead {
+    border: none;
+    td {
+        border: none;
+    }
+}
+
+tr {
+    border: 1px solid #ddd;
+    td {
+        border-top: 1px solid #ddd;
+    }
+}
+
+.mission-abandoned {
+    background: transparentize($DANGER, 0.9);
+    border: 1px solid $DANGER !important;
+    td {
+        border-top-color: $DANGER;
+        img {
+            fill: $DANGER;
+        }
+    }
+}
+
+.mission-completed {
+    background: transparentize($SUCCESS, 0.9);
+    border: 1px solid $SUCCESS !important;
+    td {
+        border-top-color: $SUCCESS;
+    }
+}
+
+.status-image {
+    width: 30px;
+}
+
+.delete-icon {
+    color: $DANGER;
+}

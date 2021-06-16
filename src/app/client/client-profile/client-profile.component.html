@@ -55,7 +55,7 @@
                             <div class="row">
                                 <div class="form-group col-lg-12">
                                     <label class="label-control">E-mail</label>
-                                    <input type="email" [disabled]="true" class="form-control" name="email" [(ngModel)]="user.email">
+                                    <input type="email" [disabled]="true" maxlength="100" class="form-control" name="email" [(ngModel)]="user.email">
                                 </div>
                                 <div class="col-lg-12 has-errors" *ngIf="errors.email">
                                     <label>{{ errors.email }}</label>
@@ -64,7 +64,7 @@
                             <div class="row">
                                 <div class="form-group col-lg-6">
                                     <label class="label-control">Nome de Usuário</label>
-                                    <input type="text" [disabled]="visit.id" class="form-control" name="username" [(ngModel)]="user.player.username">
+                                    <input type="text" maxlength="30" [disabled]="visit.id" class="form-control" name="username" [(ngModel)]="user.player.username">
                                 </div>
                                 <div class="form-group col-lg-6">
                                     <label class="label-control">Data de Nascimento</label>
@@ -96,11 +96,11 @@
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label class="label-control">Senha</label>
-                                    <input name="password" type="password" [(ngModel)]="user.password" class="form-control"/>
+                                    <input name="password" maxlength="20" type="password" [(ngModel)]="user.password" class="form-control"/>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="label-control">Confirmar Senha</label>
-                                    <input name="confirm_password" type="password" [(ngModel)]="user.confirm_password" class="form-control"/>
+                                    <input name="confirm_password" maxlength="20" type="password" [(ngModel)]="user.confirm_password" class="form-control"/>
                                 </div>
                             </div>
                             <div class="row">
@@ -135,7 +135,7 @@
             <div class="col-lg-12">
                 <div class="form-group">
                     <label>Motivo da Denuncia</label>
-                    <textarea [(ngModel)]="ban_message" name="notification_message" class="form-control" id="ban_message"></textarea>
+                    <textarea [(ngModel)]="ban_message" placeholder="Máximo 150 caracteres" maxlength="150" name="notification_message" class="form-control" id="ban_message"></textarea>
                 </div>
             </div>
         </div>

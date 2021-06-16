@@ -106,9 +106,10 @@ export class UserService {
         })
     }
 
-    getAllUsers(page:any = 1, q:string = '') {
+    getAllUsers(page:any = 1, obj:any = {q: '', birthdate: '', order: '', onlyban: false}, has_ban:boolean = false) {
+
         return new Promise((resolve, reject) => {
-            this.http.get(`${environment.apiUrl}/users?page=${page}&q=${q}`)
+            this.http.get(`${environment.apiUrl}/users?page=${page}`, {params: obj})
                 .subscribe((data:any) => resolve(data), err => reject(err));
         })
     }
@@ -144,6 +145,20 @@ export class UserService {
     cancelFriendship(friend_id:any) {
         return new Promise((resolve, reject) => {
             this.http.delete(`${environment.apiUrl}/friendship/notification/${friend_id}/delete`)
+                .subscribe((data:any) => resolve(data), err => reject(err));
+        })
+    }
+
+    banUser(user_id:any) {
+        return new Promise((resolve, reject) => {
+            this.http.post(`${environment.apiUrl}/admin/users/${user_id}/ban`, {})
+                .subscribe((data:any) => resolve(data), err => reject(err));
+        })
+    }
+
+    unbanUser(user_id:any) {
+        return new Promise((resolve, reject) => {
+            this.http.post(`${environment.apiUrl}/admin/users/${user_id}/unban`, {})
                 .subscribe((data:any) => resolve(data), err => reject(err));
         })
     }

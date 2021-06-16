@@ -1,0 +1,69 @@
+<app-admin-layout>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6 header-title">
+                <h1>Missões</h1>
+            </div>
+            <div class="col-sm-6 text-right" style="padding-top: 20px">
+                <a class="btn btn-success" routerLink="/admin/missoes/cadastro" routerLinkActive="active">
+                    Nova Missão &nbsp; <fa-icon [icon]="icons.add"></fa-icon>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <hr/>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <form class="row" (submit)="getAllMissions(1)">
+            <div class="form-group col-md-6">
+                <input type="text" name="q" [(ngModel)]="q" class="form-control" id="q" placeholder="Pesquisa">
+            </div>
+            <div class="form-group col-md-2">
+                <select name="order" [(ngModel)]="rank" class="form-control" id="rank">
+                    <option value="">Rank</option>
+                    <option [value]='"S"'>S</option>
+                    <option [value]='"A"'>A</option>
+                    <option [value]='"B"'>B</option>
+                    <option [value]='"C"'>C</option>
+                    <option [value]='"D"'>D</option>
+                    <option [value]='"E"'>E</option>
+                </select>
+            </div>
+            <div class="form-group col-md-2">
+                <select name="order" [(ngModel)]="status" class="form-control" id="status">
+                    <option value="">Status</option>
+                    <option *ngFor="let status_item of status_list" [value]='status_item.status'>{{ status_item.name }}</option>
+                </select>
+            </div>
+            <div class="form-group col-md-2">
+                <button class="btn btn-success btn-block" type="submit">
+                    Pesquisar
+                </button>
+            </div>
+        </form>
+        <div class="row mt-20">
+            <div class="col-lg-12">
+                <table class="table">
+                    <thead>
+                        <td>Missão</td>
+                        <td>Rank</td>
+                        <td>Tipo</td>
+                        <td class="text-center" style="width: 50px !important;"></td>
+                    </thead>
+                    <tr *ngFor="let mission of missions">
+                        <td (click)="missionForm(mission.id)">{{ mission.title }}</td>
+                        <td (click)="missionForm(mission.id)">{{ mission.rank }}</td>
+                        <td (click)="missionForm(mission.id)"><img class="status-image" [src]="'assets/icons/'+mission.status+'.svg'"/></td>
+                        <td class="text-center" style="width: 50px !important;">
+                            <fa-icon class="delete-icon" [icon]="icons.close" (click)="deleteMission(mission.id)"></fa-icon>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <app-pagination [pagination]="pagination" (callPaginationFunction)="getAllMissions($event)"></app-pagination>
+    </div>
+</app-admin-layout>

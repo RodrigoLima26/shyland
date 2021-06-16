@@ -12,10 +12,10 @@
                         </a>
                     </div>
                     <div class="col-2 header-items text-right display-none">
-                        <a href="#">
+                        <a class="menu-link" routerLink="/admin/perfil" routerLinkActive="active">
                             Perfil
                         </a> &nbsp; &nbsp;
-                        <a href="#">
+                        <a href="javascript:void(0)" (click)="logout()">
                             Sair
                         </a>
                     </div>
@@ -36,6 +36,32 @@
                     <div class="col-lg-12 text-center">
                         {{ user.player.username }}<br/>
                         <small>Administrador</small>
+                    </div>
+                </div>
+                <div class="row menu-itens-row">
+                    <div class="col-12">
+                        <ul>
+                            <li>
+                                <a class="menu-link" routerLink="/admin/dashboard" routerLinkActive="active">
+                                    <fa-icon [icon]="icons.dashboard"></fa-icon> &nbsp; Dashboard
+                                </a>
+                            </li>
+                            <li>
+                                <a class="menu-link" routerLink="/admin/usuarios" routerLinkActive="active">
+                                    <fa-icon [icon]="icons.users"></fa-icon> &nbsp; Usuários
+                                </a>
+                            </li>
+                            <li>
+                                <a class="menu-link" routerLink="/admin/missoes" routerLinkActive="active">
+                                    <fa-icon [icon]="icons.missions"></fa-icon> &nbsp; Missões
+                                </a>
+                            </li>
+                            <li>
+                                <a class="menu-link" routerLink="/admin/notificacoes" routerLinkActive="active">
+                                    <fa-icon [icon]="icons.notifications"></fa-icon> &nbsp; Notificações
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>

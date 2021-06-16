@@ -45,4 +45,20 @@ export class NotificationService {
         })
 
     }
+
+    sendSystemMessage(player_id, message, title:string = '') {
+        return new Promise((resolve, reject) => {
+            this.http.post(`${environment.apiUrl}/admin/notification/${player_id}/system-message`, {message: message, title: title})
+                .subscribe((data:any) => resolve(data), err => reject(err));
+        })
+
+    }
+
+    getSystemNotifications(page, body:any = {}) {
+        return new Promise((resolve, reject) => {
+            this.http.get(`${environment.apiUrl}/admin/notification?page=${page}`, {params: body})
+                .subscribe((data:any) => resolve(data), err => reject(err));
+        })
+
+    }
 }

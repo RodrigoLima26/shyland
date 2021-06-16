@@ -67,7 +67,7 @@
             <div class="col-lg-12" *ngIf="selected_notification.sender_id && !selected_notification.friend_request && openMessage">
                 <div class="form-group">
                     <label>Mensagem</label>
-                    <textarea [(ngModel)]="notification_message" name="notification_message" class="form-control" id="notification_message" placeholder="Responder mensagem"></textarea>
+                    <textarea [(ngModel)]="notification_message" maxlength="150" name="notification_message" class="form-control" id="notification_message" placeholder="Máximo 150 caracteres"></textarea>
                 </div>
             </div>
         </div>
@@ -95,7 +95,7 @@
             <div class="col-lg-12">
                 <div class="form-group">
                     <label>Motivo da Denuncia</label>
-                    <textarea [(ngModel)]="ban_message" name="notification_message" class="form-control" id="ban_message"></textarea>
+                    <textarea [(ngModel)]="ban_message" placeholder="Máximo 150 caracteres" maxlength="150" name="notification_message" class="form-control" id="ban_message"></textarea>
                 </div>
             </div>
         </div>

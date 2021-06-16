@@ -7,14 +7,21 @@
     }
 
     & > .row:last-child {
-        min-height: 120vh;
+        min-height: 100vh;
         height: 100%;
     }
 
     .left-menu {
-        background-color: $HBLUE;
-        height: 100%;
-        min-height: 120vh;
+        position: relative;
+        .container-fluid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: $HBLUE;
+            height: 100%;
+            min-height: 100vh;
+
+        }
     }
 
     .menu-header {
@@ -52,8 +59,8 @@
 .photo-row {
     padding-top: 10px;
     .profile-photo {
-        width: 150px;
-        height: 150px;
+        width: 100px;
+        height: 100px;
         border-radius: 50%;
         background-position: center;
         background-repeat: no-repeat;
@@ -73,6 +80,21 @@
         line-height: 18px;
         small {
             font-size: 16px;
+        }
+    }
+}
+
+.menu-itens-row {
+    padding-top: 20px;
+    ul {
+        padding-left: 0 !important;
+        li {
+            list-style: none !important;
+            padding: 5px 0;
+            a {
+                color: white;
+                text-decoration: none;
+            }
         }
     }
 }
@@ -98,18 +120,29 @@
         display: unset;
     }
 
-    .left-menu {
+    .admin-layout .left-menu {
         z-index: 10;
-        position: fixed;
+        position: fixed !important;
         width: 250px;
         left: -100%;
         padding: 0;
         top: 0;
         transition: 0.2s ease;
+        .container-fluid {
+            position: fixed;
+            top: 0;
+            max-width: 200px !important;
+            left: -100%;
+        }
         &.opened {
             left: -0%;
             padding: 10px;
             transition: 0.2s ease;
+            .container-fluid {
+                padding: 10px;
+                transition: 0.2s ease;
+                left: -0%;
+            }
         }
     }
 }

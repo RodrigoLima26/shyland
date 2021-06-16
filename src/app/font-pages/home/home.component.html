@@ -73,13 +73,13 @@
                 <div class="col-lg-8 offset-lg-2">
                     <form>
                         <div class="form-group">
-                            <input type="text" [(ngModel)]="contact.name" name="name" class="form-control" id="name" placeholder="Nome">
+                            <input type="text" maxlength="30" [(ngModel)]="contact.name" name="name" class="form-control" id="name" placeholder="Nome">
                         </div>
                         <div class="form-group">
-                            <input type="text" [(ngModel)]="contact.contact" name="contact" class="form-control" id="contact" placeholder="Contato (E-mail, Telefone, Celular, etc..)">
+                            <input type="text" maxlength="100" [(ngModel)]="contact.contact" name="contact" class="form-control" id="contact" placeholder="Contato (E-mail, Telefone, Celular, etc..)">
                         </div>
                         <div class="form-group">
-                            <textarea rows="4" [(ngModel)]="contact.message" name="message" class="form-control" id="message" placeholder="Mensagem *"></textarea>
+                            <textarea rows="4" maxlength="300" [(ngModel)]="contact.message" name="message" class="form-control" id="message" placeholder="Mensagem * (300 caracteres)"></textarea>
                         </div>
                     </form>
                 </div>

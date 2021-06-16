@@ -15,6 +15,6 @@ export class ValidationsService {
 
   dateIsValid(date, format_from) {
       moment.locale('pt-br');
-      return moment(moment(date).format(format_from), format_from,true).isValid();
+      return moment(moment(date, format_from).format('YYYY-MM-DD'), 'YYYY-MM-DD',true).isValid();
   }
 }

@@ -212,7 +212,6 @@ export class ClientProfileComponent implements OnInit {
             if(!user.player.username) this.errors.username = 'Nome de usuário está inválido';
 
             if(user.email && !this.validations.emailIsValid(user.email)) this.errors.email = 'E-mail Inválido';
-            if(user.player.formatted_birthdate && this.validations.dateIsValid(user.player.formatted_birthdate, 'DD/MM/YYYY')) this.errors.player.birthdate = 'Data de Nascimento está inválida';
 
             setTimeout(() => {
                 let total = 0;
