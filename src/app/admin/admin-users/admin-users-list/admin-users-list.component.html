@@ -38,6 +38,7 @@
             <div class="col-lg-12">
                 <table class="table">
                     <thead>
+                        <td>#</td>
                         <td>Nome de Usuário</td>
                         <td class="text-right">Nível</td>
                         <td class="text-right">Missões Completas</td>
@@ -46,6 +47,7 @@
                         <td class="text-right">Banido Em</td>
                     </thead>
                     <tr *ngFor="let user of users">
+                        <td (click)="userProfile(user.user_id)">{{ user.user_id }}</td>
                         <td (click)="userProfile(user.user_id)">{{ user.username }}</td>
                         <td (click)="userProfile(user.user_id)" class="text-right">{{ user.level }}</td>
                         <td (click)="userProfile(user.user_id)" class="text-right">{{ user.finished_missions }}</td>

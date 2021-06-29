@@ -94,7 +94,7 @@
                     <strong>Contato: </strong> {{ selected_notification.contact }}
                 </p>
                 <p>
-                    {{ selected_notification.message }}
+                    {{ selected_notification.complaint_request ? selected_notification.complaint_request : selected_notification.message }}
                 </p>
                 <p *ngIf="selected_notification.isContact && !respond_contact" (click)="respond_contact = true">
                     <a href="javascript:void(0)">Responder Contato</a>

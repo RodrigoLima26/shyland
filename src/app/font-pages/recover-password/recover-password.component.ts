@@ -32,8 +32,6 @@ export class RecoverPasswordComponent implements OnInit {
     ngOnInit(): void {
         this.route.paramMap.subscribe(params => {
             this.token = params.get("token");
-
-            console.log(this.token);
         })
     }
 

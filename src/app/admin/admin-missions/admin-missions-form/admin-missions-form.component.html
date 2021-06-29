@@ -2,10 +2,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-6 header-title">
-                <h1>{{ mission.id ? mission.description : 'Nova Missão' }}</h1>
+                <h1>{{ mission.id ? mission.title : 'Nova Missão' }}</h1>
             </div>
             <div class="col-sm-6 header-breadcrumb">
-                <a routerLink="/admin/missoes" routerLinkActive="active">Missões</a> > {{ mission.id ? mission.description : 'Nova Missão' }}
+                <a routerLink="/admin/missoes" routerLinkActive="active">Missões</a> > {{ mission.id ? mission.title : 'Nova Missão' }}
             </div>
         </div>
         <div class="row">

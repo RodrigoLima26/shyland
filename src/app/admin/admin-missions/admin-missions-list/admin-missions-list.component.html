@@ -48,12 +48,14 @@
             <div class="col-lg-12">
                 <table class="table">
                     <thead>
+                        <td>#</td>
                         <td>Missão</td>
                         <td>Rank</td>
                         <td>Tipo</td>
                         <td class="text-center" style="width: 50px !important;"></td>
                     </thead>
                     <tr *ngFor="let mission of missions">
+                        <td (click)="missionForm(mission.id)">{{ mission.id }}</td>
                         <td (click)="missionForm(mission.id)">{{ mission.title }}</td>
                         <td (click)="missionForm(mission.id)">{{ mission.rank }}</td>
                         <td (click)="missionForm(mission.id)"><img class="status-image" [src]="'assets/icons/'+mission.status+'.svg'"/></td>
