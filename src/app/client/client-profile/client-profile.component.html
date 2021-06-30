@@ -20,7 +20,7 @@
                             Retirar pedido de Amizade
                         </button>
 
-                        <button class="btn btn-block btn-danger mt-20" (click)="cancelFriendship(friend.id)" *ngIf="friend.id && visit.id">
+                        <button class="btn btn-block btn-danger mt-20" (click)="cancelFriendship(friend.id)" *ngIf="friend.id && visit.id && !friend.id">
                             Desfazer Amizade
                         </button>
                         <button class="btn btn-block btn-success mt-20" *ngIf="!friend.id && visit.id && !notification.id" (click)="sendFriendshipRequest(user.id)">

@@ -26,8 +26,8 @@
                                 <td><a routerLink="/jogador/perfil/{{ notification.sender.user.id }}" *ngIf="notification.sender_id" routerLinkActive="active">{{ notification.sender.username }}</a></td>
                                 <td (click)="openModal(mymodal, notification)">{{ notification.created_at | formatDate }}</td>
                                 <td class="text-center">
-                                    <fa-icon style="cursor: pointer" class="c-info" *ngIf="notification.sender_id" (click)="openModal(mymodal, notification, true)" [icon]="icons.reply"></fa-icon> &nbsp; &nbsp;
-                                    <fa-icon class="c-danger" (click)="deleteNotification(notification)" [icon]="icons.close"></fa-icon>
+                                    <fa-icon title="Responder Notificação" style="cursor: pointer" class="c-info" *ngIf="notification.sender_id" (click)="openModal(mymodal, notification, true)" [icon]="icons.reply"></fa-icon> &nbsp; &nbsp;
+                                    <fa-icon title="Excluir Notificação" class="c-danger" (click)="deleteNotification(notification)" [icon]="icons.close"></fa-icon>
                                 </td>
                             </ng-container>
                             <ng-container *ngIf="notification.friend_request == 1">

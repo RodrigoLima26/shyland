@@ -4,8 +4,8 @@
 
 export const environment = {
     production: false,
-    apiUrl: 'http://localhost:82/api',
-    socialUrl: 'http://localhost:82'
+    apiUrl: 'https://shyland.herokuapp.com/api',
+    socialUrl: 'https://shyland.herokuapp.com'
 };
 
 /*
